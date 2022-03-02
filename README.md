@@ -13,7 +13,7 @@
 
 ### 2. 사용 프로그램 : R 4.0.0
 #### 사용 라이브러리 : 
-> library(ggplot2)
+> library(ggplot2)  
 > library(GGally)
 
 #
