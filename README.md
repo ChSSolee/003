@@ -136,12 +136,23 @@ tail(round(cor,3), 5)
 ```javascript
 GGally::ggcorr(quan_var, name = "corr", label = T)
 ```
-<img width="200" height="250" src="https://user-images.githubusercontent.com/100699925/156291652-aa1a8a48-ab44-437c-aa76-93e031dba97f.jpg">
+<img width="840" height="600" src="https://user-images.githubusercontent.com/100699925/158415697-229ea9d7-f6d6-4f01-ab67-7363f30f712b.png">
 
+<br/>
 
 ```javascript
 diag(solve(cor))
 ```
+```
+##         3         6         7         8         9        10        11        12 
+##  1.114663  1.087554  2.380131  1.675573  2.730450  1.700751  1.787804  2.299574 
+##        13        14        15        16        17        18        19        20 
+##  3.320140  1.764527  1.373716  1.917640  1.209643  2.028954  2.565907 14.672077 
+##        21 
+## 14.677267
+```
+
+<br/>
 
 - 상관계수 행렬 cor과 이를 “GGally”패키지의 ggcorr()함수를 통해 히트맵으로 시각화한 결과, 20번째 설명변수(출발 지연 시간)와, 21번째 설명변수(도착 지연 시간)간 높은 상관관계가 있음을 확인 할 수 있었다. 또한 해당 변수들의 VIF값들 또한 10이상의 값을 가짐으로서, 다중공선성의 존재를 알 수 있다.
 - 이는 상식적으로 항공기의 출발에 지연이 있다면, 도착에 지연이 발생할 확률이 높아지는 것은 당연한 결과라고 할 수 있다. 따라서 이에 대한 보완으로, 두 변수중 하나인 ‘출발 지연 시간’을 분석에서 제외하기로 결정하였다.
@@ -153,6 +164,11 @@ idx <- sample(1:nrow(data), 10000)
 dat <- data[idx,]
 dim(dat)
 ```
+```
+## [1] 10000    22
+```
+
+<br/>
 
 - 129487명의 고객 데이터에서, 10000명의 랜덤 추출한 데이터를 사용 
 
@@ -160,7 +176,6 @@ dim(dat)
 Fullmod = glm(Satisfaction ~ ., dat = dat[,-21], family = binomial(link = "logit"))
 backward <- step(Fullmod, direction = "backward") ; formula(backward)
 ```
-
 - ‘출발 지연 시간’을 제외한 모든 설명변수를 포함한 완전모형에서 step()함수의 후진 소거법을 적용하여 최저의 AIC값을 가지는 모형을 탐색한 결과, 완전모형과 동일한 모형을 얻을 수 있었다.
 - 이에 따라 본 분석에서는 완전모형을 적합하기로 결정하였다.
 
@@ -171,11 +186,63 @@ backward <- step(Fullmod, direction = "backward") ; formula(backward)
 ```javascript
 summary(Fullmod)
 ```
+```
+## 
+## Call:
+## glm(formula = Satisfaction ~ ., family = binomial(link = "logit"), 
+##     data = dat[, -21])
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -2.8028  -0.5798   0.2216   0.5267   3.6043  
+## 
+## Coefficients:
+##                                 Estimate Std. Error z value Pr(>|z|)    
+## (Intercept)                   -6.829e+00  2.277e-01 -29.991  < 2e-16 ***
+## GenderMale                    -9.560e-01  5.853e-02 -16.332  < 2e-16 ***
+## Customer.TypeLoyal Customer    2.003e+00  8.900e-02  22.507  < 2e-16 ***
+## Age                           -9.378e-03  2.051e-03  -4.572 4.83e-06 ***
+## Type.of.TravelPersonal Travel -7.245e-01  8.332e-02  -8.695  < 2e-16 ***
+## ClassEco                      -7.364e-01  7.531e-02  -9.779  < 2e-16 ***
+## ClassEco Plus                 -6.683e-01  1.180e-01  -5.662 1.49e-08 ***
+## Flight.Distance               -1.105e-04  3.044e-05  -3.631 0.000283 ***
+## Seat.comfort                   3.054e-01  3.223e-02   9.474  < 2e-16 ***
+## Dep.Arr.time.convenient       -2.448e-01  2.471e-02  -9.904  < 2e-16 ***
+## Food.and.drink                -1.514e-01  3.313e-02  -4.569 4.91e-06 ***
+## Gate.location                  1.427e-01  2.775e-02   5.142 2.71e-07 ***
+## Inflight.entertainment         6.421e-01  2.905e-02  22.103  < 2e-16 ***
+## Online.support                 5.380e-02  3.227e-02   1.667 0.095556 .  
+## Ease.of.Online.booking         2.061e-01  3.852e-02   5.350 8.80e-08 ***
+## On.board.service               3.228e-01  3.010e-02  10.723  < 2e-16 ***
+## Leg.room.service               2.132e-01  2.481e-02   8.594  < 2e-16 ***
+## Baggage.handling               1.192e-01  3.248e-02   3.671 0.000242 ***
+## Checkin.service                3.043e-01  2.466e-02  12.343  < 2e-16 ***
+## Cleanliness                    5.587e-02  3.425e-02   1.631 0.102837    
+## Online.boarding                1.565e-01  3.389e-02   4.617 3.89e-06 ***
+## Arrival.Delay                 -4.410e-03  8.100e-04  -5.445 5.17e-08 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 13739.5  on 9999  degrees of freedom
+## Residual deviance:  7822.3  on 9978  degrees of freedom
+## AIC: 7866.3
+## 
+## Number of Fisher Scoring iterations: 5
+```
+
 
 - 모든 설명변수를 포함한 완전모형을 적합하였을 때의 회귀계수, 이탈도, AIC값은 위의 결과와 같다.
 - 모든 회귀계수 추정값은 통계적으로 유의하며, 모형의 이탈도는 7510.5로서, 자유도 9978의 카이제곱분포 상위 0.05분위수  10211.49보다 작다. 따라서 현재모형의 적합도는 좋다고 해석 할 수 있다.
+
+<br/>
+
 ```javascript
 qchisq(0.95, 9978) 
+```
+```
+## [1] 10211.49
 ```
 - 다만, 데이터가 10000 X 21 의 차원을 가진 크기가 큰 데이터라는 점을 고려하였을 때, 위 결과의 낮은 P-값들과 그에 따른 통계적 유의성은 데이터의 크기 때문일 수도 있다는 점을 인지해야 된다.
 
@@ -184,11 +251,30 @@ qchisq(0.95, 9978)
 
 ### 오즈비 계산 및 회귀 계수 해석
 
-```javascript
-library(knitr)
-a <- as.data.frame(round(exp(Fullmod$coefficients), 4))
-kable(a)
-```
+|	| **round(exp(Fullmod$coefficients), 4)** |
+| ---- | ---- |
+| (Intercept)	| 0.0011 |
+| GenderMale	| 0.3844 |
+| Customer.TypeLoyal Customer	| 7.4125 |
+| Age	| 0.9907 |
+| Type.of.TravelPersonal | Travel	0.4846 |
+| ClassEco | 0.4788 |
+| ClassEco Plus | 0.5126 |
+| Flight.Distance | 0.9999 |
+| Seat.comfort | 1.3571 |
+| Dep.Arr.time.convenient | 0.7829 |
+| Food.and.drink | 0.8595 |
+| Gate.location | 1.1534 |
+| Inflight.entertainment | 1.9005 |
+| Online.support | 1.0553 |
+| Ease.of.Online.booking | 1.2289 |
+| On.board.service | 1.3810 |
+| Leg.room.service | 1.2377 |
+| Baggage.handling | 1.1266 |
+| Checkin.service | 1.3557 |
+| Cleanliness | 1.0575 |
+| Online.boarding | 1.1694 |
+| Arrival.Delay | 0.9956 |
 
 - 고객의 성별이 남성일 때의 오즈가, 여성일 때의 오즈의 0.39배이다. 즉, 서비스에 만족하는 경향은 남성보다 여성이 더 크다.
 - 충성도가 높은 고객의 오즈가 충성도가 낮은 고객의 오즈보다 7.5배 크다.
@@ -213,10 +299,18 @@ pred <- predict(Fullmod, newdata = data, type = "response")
 pred1 <- as.factor(ifelse(pred < 0.5, 0, 1))
 (CM <- table(pred1, data$Satisfaction)) 
 ```
+```
+##      
+## pred1     0     1
+##     0 47602 10347
+##     1 11003 60535
+```
 ```javascript
 mean(pred1 == data$Satisfaction)
 ```
-
+```
+## [1] 0.8351186
+```
 - 위의 결과의 CM은 예측값들과 실제값들을 대조한 행렬이다. (가로 = 실제값, 세로 = 예측값)
 - 분석에서 적합한 모형을 바탕으로 예측한 고객들의 만족여부가, 실제 고객들의 만족여부와 일치할 확률은 0.8357 (83.57%)임을 알 수 있다.
 
