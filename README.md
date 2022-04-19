@@ -39,29 +39,30 @@
 
 
 ### 변수
-
-- Satisfaction : 고객 만족 여부 / 명목형 (1 = 만족 / 0 = 중립 또는 불만족) 
-- Gender : 고객의 성별 / 명목형 (Female = 여성 / Male = 남성)
-- Customer.Type : 고객 유형 / 명목형 (disloyal Customer = 충성도가 낮은 고객 / Loyal Customer = 충성도가 높은 고객 )
-- Age : 고객의 연령 / 수치형
-- Type.of.Travel : 고객의 탑승 목적 / 명목형 (Personal Travel = 개인적 목적 / Business Travel = 비즈니스 목적)
-- Class : 좌석 유형 / 명목형 (Business = 비즈니스 석 / Eco Plus = 이코노미 플러스 / Eco = 이코노미)
-- Flight.Distance : 비행 거리(노트) / 수치형
-- Seat.comfort : 착석감 / 순서형 (0 ~ 5)
-- Dep.Arr.time.convenient : 도착/출발 편리성 / 순서형 (0 ~ 5)
-- Food.and.drink : 기내식 만족도 / 순서형 (0 ~ 5)
-- Gate.location : 게이트 위치 만족도 / 순서형 (0 ~ 5)
-- Inflight.entertainment : 기내 오락 만족도 / 순서형 (0 ~ 5)
-- Online.support : 온라인 지원 만족도 / 순서형 (0 ~ 5)
-- Ease.of.Online.booking : 온라인 예약 용이성 / 순서형 (0 ~ 5)
-- On.board.service : 기내 서비스 만족도 / 순서형 (0 ~ 5)
-- Leg.room.service : 레그룸 만족도 / 순서형 (0 ~ 5)
-- Baggage.handling : 수화물 처리 만족도 / 순서형 (0 ~ 5)
-- Checkin.service : 체크인 서비스 만족도 / 순서형 (0 ~ 5)
-- Cleanliness : 청결도 / 순서형 (0 ~ 5)
-- Online.boarding : 온라인 탑승 만족도 / 순서형 (0 ~ 5)
-- Departure.Delay : 출발 지연 시간(분) / 수치형
-- Arrival.Delay : 도착 지연 시간(분) / 수치형
+| | | |
+| -- | -- | -- |
+| Satisfaction | 고객 만족 여부 | 명목형 (1 = 만족 / 0 = 중립 또는 불만족) |
+| Gender | 고객의 성별 | 명목형 (Female = 여성 / Male = 남성) |
+| Customer.Type | 고객 유형 | 명목형 (disloyal Customer = 충성도가 낮은 고객 / Loyal Customer = 충성도가 높은 고객 ) |
+| Age | 고객의 연령 | 수치형 |
+| Type.of.Travel | 고객의 탑승 목적 / 명목형 (Personal Travel = 개인적 목적 / Business Travel = 비즈니스 목적) |
+| Class | 좌석 유형 | 명목형 (Business = 비즈니스 석 / Eco Plus = 이코노미 플러스 / Eco = 이코노미) |
+| Flight.Distance | 비행 거리(노트) | 수치형 |
+| Seat.comfort | 착석감 | 순서형 (0 ~ 5) |
+| Dep.Arr.time.convenient | 도착/출발 편리성 | 순서형 (0 ~ 5) ||
+| Food.and.drink | 기내식 만족도 | 순서형 (0 ~ 5) |
+| Gate.location | 게이트 위치 만족도 | 순서형 (0 ~ 5) |
+| Inflight.entertainment | 기내 오락 만족도 | 순서형 (0 ~ 5) |
+| Online.support | 온라인 지원 만족도 | 순서형 (0 ~ 5) |
+| Ease.of.Online.booking | 온라인 예약 용이성 | 순서형 (0 ~ 5) |
+| On.board.service | 기내 서비스 만족도 | 순서형 (0 ~ 5) |
+| Leg.room.service | 레그룸 만족도 | 순서형 (0 ~ 5) |
+| Baggage.handling | 수화물 처리 만족도 | 순서형 (0 ~ 5) |
+| Checkin.service | 체크인 서비스 만족도 | 순서형 (0 ~ 5) |
+| Cleanliness | 청결도 | 순서형 (0 ~ 5) |
+| Online.boarding | 온라인 탑승 만족도 | 순서형 (0 ~ 5) |
+| Departure.Delay | 출발 지연 시간(분) | 수치형 |
+| Arrival.Delay | 도착 지연 시간(분) | 수치형 |
 
 <br/>
 
